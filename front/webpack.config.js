@@ -1,0 +1,113 @@
+// webpack v4
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+const PATHS = {
+  src: path.join(__dirname, '/src'),
+  dist: path.join(__dirname, '/dist'),
+};
+
+module.exports = {
+  entry: {main: './src/index.js'},
+  output: {
+    path: PATHS.dist,
+    filename: '[name].js',
+    chunkFilename: '[name].bundle.js'
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+      },
+    }
+  },
+  module: {
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: [/node_modules/],
+        loader: 'eslint-loader',
+      },
+      {
+        test: /\.js$/,
+        exclude: [/node_modules/],
+        use: {
+          loader: 'babel-loader'
+        }
+      },
+
+      {
+        test: /\.scss$/,
+        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]',
+              context: PATHS.src,
+            }
+          }
+        ]
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
+        options: {
+          limit: 1,
+          noquotes: true
+        }
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader'
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+          }
+        }]
+      },
+      {
+        test: /\.hbs$/,
+        loader: 'handlebars-loader'
+      }
+    ],
+  },
+  stats: {
+    // Nice colored output
+    colors: true
+  },
+  plugins: [
+    new CleanWebpackPlugin('dist', {}),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      // chunks: ['main'],
+      filename: 'index.html'
+    }),
+    /*
+        // Add new page
+        // Available @ localhost:8080/listing.html
+        new HtmlWebpackPlugin({
+          template: './src/listing.html.ejs',
+          chunks: ['main'],
+          filename: 'listing.html'
+        }),
+    */
+  ],
+};

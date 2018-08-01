@@ -1,0 +1,23 @@
+
+@font-face {
+  font-family: 'Din Pro';
+  src: url("../fonts/DINPro-Regular.woff2") format("woff2"),
+  url("../fonts/DINPro-Regular.woff") format("woff");
+  font-weight: normal;
+}
+
+body {
+  background: rgba(182, 255, 62, 0.37) url('./../images/push_1.jpg') no-repeat center / contain;
+  font-family: 'Din Pro';
+}
+.cccc {
+  background: cornflowerblue;
+  width: 25%;
+  border: 1px solid blue;
+}
+.aaaa {
+  background: red;
+}
+.bbbb {
+  background: red;
+}

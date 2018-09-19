@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 const PATHS = {
   src: path.join(__dirname, '/src'),
@@ -10,7 +11,7 @@ const PATHS = {
 };
 
 module.exports = {
-  entry: {main: './src/index.js'},
+  entry: {main: './src/assets/js/index.js'},
   output: {
     path: PATHS.dist,
     filename: '[name].js',
@@ -64,7 +65,9 @@ module.exports = {
         loader: 'svg-url-loader',
         options: {
           limit: 1,
-          noquotes: true
+          noquotes: true,
+          name: '[path][name].[ext]',
+          context: PATHS.src,
         }
       },
       {
@@ -97,14 +100,16 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      // chunks: ['main'],
       filename: 'index.html'
     }),
+    new webpack.ProvidePlugin({
+      Promise: 'es6-promise'
+    })
     /*
         // Add new page
         // Available @ localhost:8080/listing.html
         new HtmlWebpackPlugin({
-          template: './src/listing.html.ejs',
+          template: './src/listing.html',
           chunks: ['main'],
           filename: 'listing.html'
         }),

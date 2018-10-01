@@ -1,17 +1,33 @@
 import './../scss/index.scss';
 import $ from 'jquery';
+import Common from './common';
 
-export default class App {
+require('es6-promise').polyfill();
+
+export class App {
   constructor () {
-    const element = document.createElement('div');
-    element.innerHTML = 'Hello World!';
-    console.log('hello');
-    document.body.appendChild(element);
+    this.initEls();
+    this.launchPage();
+  }
 
-    const button = document.getElementById('button');
-    button.onclick = e => import(/* webpackChunkName: "listing" */ './listing.js').then(module => {
-      const listing = new module.Listing();
-    });
+  initEls () {
+    this.$els = {
+      $homepage: $('.js-homepage') || null,
+    };
+  }
+
+  launchPage () {
+    // Everytime, import Common js (menu, etc.)
+    new Common();
+    // Import the right file according to the current page
+    if (this.$els.$homepage.length > 0) {
+      import(/* webpackChunkName: "homepage" */ './homepage.js').then(module => {
+        const Homepage = module.default;
+        new Homepage();
+      }).catch((e) => {
+        console.log(e);
+      });
+    }
   }
 }
 

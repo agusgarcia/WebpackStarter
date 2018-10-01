@@ -22,12 +22,14 @@ if (MB) {
     js: MB,
     images: `images-mb-${MB}`,
     css: `css-mb-${MB}`,
+    chunk: `${MB}-`
   }
 } else {
   NAMES = {
     js: 'main',
     images: 'images',
-    css: 'css'
+    css: 'css',
+    chunk: ''
   }
 }
 module.exports = {
@@ -38,7 +40,7 @@ module.exports = {
     path: PATHS.root,
     filename: `js/${NAMES.js}.js`,
     publicPath: './',
-    chunkFilename: `js/${NAMES.js}-[name].bundle.js`
+    chunkFilename: `js/${NAMES.chunk}[name].bundle.js`
   },
 
   /*

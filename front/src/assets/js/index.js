@@ -1,4 +1,4 @@
-import './assets/scss/index.scss';
+import './../scss/index.scss';
 import $ from 'jquery';
 
 export default class App {

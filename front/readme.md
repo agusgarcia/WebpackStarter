@@ -101,3 +101,5 @@
      `$ npm run build`
      
      Le js sera généré dans le dossier /js, le css dans le dossier /css et les images dans le dossier /images.
+     
+     /!\ Penser à modifier la variable **MB** dans le fichier de prod de Webpack afin que les fichiers soient générés dans le bon dossier. '*null*'si on est sur un site classique, *leNomDeLaMarqueBlanche* s'il s'agit d'une marque blanche.

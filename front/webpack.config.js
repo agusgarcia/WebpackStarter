@@ -36,6 +36,11 @@ module.exports = {
         exclude: [/node_modules/],
         loader: 'eslint-loader',
       },
+      // If scrollMagic is needed :
+     /* {
+        test: /\.js$/,
+        loader: "imports-loader?define=>false"
+      },*/
       {
         test: /\.js$/,
         exclude: [/node_modules/],
@@ -89,6 +94,13 @@ module.exports = {
       }
     ],
   },
+  // If scrollMagic is needed
+  /*resolve: {
+    extensions: ['.js'],
+    alias: {
+      "ScrollMagicGSAP": "scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap"
+    }
+  },*/
   stats: {
     // Nice colored output
     colors: true

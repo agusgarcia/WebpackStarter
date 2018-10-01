@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
- const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+ // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
 
 const PATHS = {
@@ -13,8 +13,8 @@ const PATHS = {
 };
 
 // TODO : /!\ Set MB name or null /!\
-// const MB = null';
-const MB = 'regionv2';
+const MB = null;
+// const MB = 'regionv2';
 
 let NAMES;
 if (MB) {
@@ -37,7 +37,7 @@ module.exports = {
   output: {
     path: PATHS.root,
     filename: `js/${NAMES.js}.js`,
-    publicPath: '/',
+    publicPath: './',
     chunkFilename: `js/${NAMES.js}-[name].bundle.js`
   },
 
@@ -63,6 +63,11 @@ module.exports = {
 
   module: {
     rules: [
+      // If scrollMagic is needed
+     /* {
+        test: /\.js$/,
+        loader: "imports-loader?define=>false"
+      },*/
       {
         test: /\.js$/,
         exclude: [/node_modules/],
@@ -104,8 +109,9 @@ module.exports = {
           options: {
             name: '[path][name].[ext]',
             context: PATHS.assets,
-          }
-        }]
+          },
+        }],
+        exclude: [`${PATHS.assets}images`],
       },
       {
         test: /\.svg$/,
@@ -113,17 +119,23 @@ module.exports = {
         options: {
           limit: 1,
           noquotes: true,
-          name: `${NAMES.images}/[name].[ext]`,
+          name: `images/[path][name].[ext]`,
+          context: `${PATHS.assets}images`,
         },
-        exclude: [`/${PATHS.assets}fonts/`],
       }/*,
       {
         test: /\.hbs$/,
         loader: 'handlebars-loader'
       }*/
     ],
-
   },
+  // If scrollMagic is needed
+/*  resolve: {
+    extensions: ['.js'],
+    alias: {
+      "ScrollMagicGSAP": "scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap"
+    }
+  },*/
   stats: {
     colors: true
   },
@@ -143,6 +155,6 @@ module.exports = {
       Promise: 'es6-promise'
     }),
     // TODO : add BundleAnalyzerPlugin
-    new BundleAnalyzerPlugin()
+    //new BundleAnalyzerPlugin()
   ],
 };

@@ -12,9 +12,9 @@
 
     `$ cd front`
     
-    `$ npm run start:dev`
+    `$ npm run start`
 
- 3. Ouvrir http://localhost:8080/
+ 3. Ouvrir http://localhost:8080/ si cela ne se fait pas automatiquement
  
  4. Pour modifier les fichiers source : modifier les fichiers du répertoire front/src (pour le CSS on utilise du SCSS, pour le JS, ES6). 
  

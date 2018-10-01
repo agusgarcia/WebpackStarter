@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production --config webpack.prod.js",
-    "start": "webpack-dev-server --mode development --open",
-    "light-build": "webpack --mode production --config webpack.light-prod.js"
+    "start": "webpack-dev-server --mode development --open"
   },
   "author": "Business For Fun - Agustina Garcia",
   "license": "ISC",

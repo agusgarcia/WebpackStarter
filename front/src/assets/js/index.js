@@ -2,7 +2,6 @@ import './../scss/index.scss';
 import $ from 'jquery';
 import Common from './common';
 
-require('es6-promise').polyfill();
 
 export class App {
   constructor () {

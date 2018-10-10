@@ -95,7 +95,6 @@
             });
         }
        
- 
  5. Pour générer les fichiers à mettre en prod (dans le répertoire /front) : 
  
      `$ npm run build`
@@ -103,3 +102,17 @@
      Le js sera généré dans le dossier /js, le css dans le dossier /css et les images dans le dossier /images.
      
      /!\ Penser à modifier la variable **MB** dans le fichier de prod de Webpack afin que les fichiers soient générés dans le bon dossier. '*null*'si on est sur un site classique, *leNomDeLaMarqueBlanche* s'il s'agit d'une marque blanche.
+     
+ 6. Swiper peut ne pas fonctionner sur IE11. Pour cela :
+    1. Installer es6-promise
+    
+        `npm install es6-promise --save`
+    
+        Dans le fichier `index.js`, `require('es6-promise').polyfill()`
+   
+        Dans le fichier de config Webpack, dans le plugins :  
+        `new webpack.ProvidePlugin({
+        Promise: 'es6-promise' }) `
+    
+    2. Appeler Swiper avec le path complet `import Swiper from 'swiper/dist/js/swiper.js';`
+    

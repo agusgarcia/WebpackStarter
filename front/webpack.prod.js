@@ -121,9 +121,10 @@ module.exports = {
         options: {
           limit: 1,
           noquotes: true,
-          name: `images/[path][name].[ext]`,
+          name: `${NAMES.images}/[path][name].[ext]`,
           context: `${PATHS.assets}images`,
         },
+        exclude: [`${PATHS.assets}fonts`],
       }/*,
       {
         test: /\.hbs$/,

@@ -44,10 +44,10 @@
                 this.defaultValue = 5;
             }
             initEvents () {
-                // Function à appeler lors de la création de la classe 'Module'
+                // Fonction à appeler lors de la création de la classe 'Module'
                 this.initializeDatePicker();
                 
-                // Function à appeler lors du click du $jqueryElement
+                // Fonction à appeler lors du clic du $jqueryElement
                 this.$els.$jqueryElement.on('click', this.elementOnClick.bind(this));
             }
             
@@ -85,8 +85,8 @@
         
         importListing () {
             // /* webpackChunkName = "..." */ = nom du fichier js qui sera généré
-            // Dans notre cas, le fichier js s'appelera listing.bundle.js 
-            // (avec en prefixe le nom de la marque blanche + '-' si c'est le cas, 
+            // Dans notre cas, le fichier js s'appellera listing.bundle.js 
+            // (avec en préfixe le nom de la marque blanche + '-' si c'est le cas, 
             // par exemple : regionv2-listing.bundle.js)
             import(/* webpackChunkName: "listing" */ './listing.js').then(module => {
                 const Listing = module.default;
@@ -103,7 +103,10 @@
      
      /!\ Penser à modifier la variable **MB** dans le fichier de prod de Webpack afin que les fichiers soient générés dans le bon dossier. '*null*'si on est sur un site classique, *leNomDeLaMarqueBlanche* s'il s'agit d'une marque blanche.
      
- 6. Swiper peut ne pas fonctionner sur IE11. Pour cela :
+     
+ ## Plugins utilisés fréquemment
+ 
+ 1. Swiper peut ne pas fonctionner sur IE11. Pour cela :
     1. Installer es6-promise
     
         `npm install es6-promise --save`
@@ -114,5 +117,16 @@
         `new webpack.ProvidePlugin({
         Promise: 'es6-promise' }) `
     
-    2. Appeler Swiper avec le path complet `import Swiper from 'swiper/dist/js/swiper.js';`
+    2. importer Swiper avec le path complet `import Swiper from 'swiper/dist/js/swiper.js';`
+    
+2. Flatpickr : afin de n'importer que les langues dont nous avons besoin, inclure la librairie comme cela :
+    ``` 
+    import flatpickr from 'flatpickr'; 
+    import {French} from 'flatpickr/dist/l10n/fr.js';
+    import {english} from 'flatpickr/dist/l10n/default';
+    ```
+    
+    Pour installer le css nécessaire : `@import url("~flatpickr/dist/flatpickr.min.css");`
+    
+   
     

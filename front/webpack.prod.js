@@ -96,7 +96,9 @@ module.exports = {
             loader: 'file-loader',
             options: {
               context: PATHS.assets,
-              name: `/${NAMES.images}/[name].[ext]`,
+              name: `${NAMES.images}/[name].[ext]`,
+              // Public path modified for 'Maquettes'
+              // publicPath: '/',
             },
           }
         ]
